@@ -1,5 +1,5 @@
-import { Head, useData } from "aleph/react";
-import React, { useEffect, useState, KeyboardEvent } from 'react'
+import { Head, useData } from 'aleph/react';
+import { useEffect, useState } from 'react';
 
 export type Word = {
   id: number;
@@ -12,19 +12,17 @@ export type Store = {
 };
 
 const store: Store = {
-  words: JSON.parse(window.localStorage?.getItem("words") || "[]"),
+  words: JSON.parse(window.localStorage?.getItem('words') || '[]'),
 };
 
 export const data: Data<Store, Store> = {
   cacheTtl: 0, // no cache
-  get: () => {
-    return store;
-  },
+  get: () => store,
   put: async (req) => {
     const { message } = await req.json();
-    if (typeof message === "string") {
+    if (typeof message === 'string') {
       store.words.push({ id: Date.now(), message, completed: false });
-      window.localStorage?.setItem("words", JSON.stringify(store.words));
+      window.localStorage?.setItem('words', JSON.stringify(store.words));
     }
     return store;
   },
@@ -32,23 +30,29 @@ export const data: Data<Store, Store> = {
     const { id, message, completed } = await req.json();
     const word = store.words.find((word) => word.id === id);
     if (word) {
-      if (typeof message === "string") {
+      if (typeof message === 'string') {
         word.message = message;
       }
-      if (typeof completed === "boolean") {
+      if (typeof completed === 'boolean') {
         word.completed = completed;
       }
-      window.localStorage?.setItem("words", JSON.stringify(store.words));
+      window.localStorage?.setItem('words', JSON.stringify(store.words));
     }
     return store;
   },
-  delete: () => {
-    return store;
-  },
+  delete: () => store,
 };
 
 export default function Words() {
+  const step = 5;
   const { data: { words }, isMutating, mutation } = useData<Store>();
+  const [displayWordList, setDisplayWordList] = useState<string[]>([]);
+  useEffect(() => {
+    if (words) {
+      const wordlist = words.map((obj) => obj.message);
+      setDisplayWordList(wordlist.slice(-step));
+    }
+  }, []);
 
   return (
     <div className="game">
@@ -59,41 +63,47 @@ export default function Words() {
       <h1>
         <span>しりとりはじまりはじまり</span>
       </h1>
+      {words.length > step && (
       <table>
-            <tbody>
-                {words.map((word, i) => {
-                    return (
-                        <tr>
-                            <td>
-                                {++i}
-                            </td>
-                            <td>
-                                {word.message}
-                            </td>
-                        </tr>
-                    )})}
-            </tbody>
-        </table>
+        <tbody>
+          {displayWordList.map((word, i) => (
+            <tr>
+              <td>
+                {words.length - step + i}
+              </td>
+              <td>
+                {word}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      )}
+      <p>
+        {words.length}
+        {' '}
+        {words.slice(-1)[0].message}
+      </p>
       <form
         onSubmit={async (e) => {
           e.preventDefault();
           const form = e.currentTarget;
           const fd = new FormData(form);
-          const message = fd.get("message")?.toString().trim();
+          const message = fd.get('message')?.toString().trim();
           if (message) {
             await mutation.put({ message }, {
               // optimistic update data without waiting for the server response
-              optimisticUpdate: (data) => {
-                return {
-                  words: [...data.words, { id: 0, message, completed: false }],
-                };
-              },
+              optimisticUpdate: (data) => ({
+                words: [...data.words, { id: 0, message, completed: false }],
+              }),
               // replace the data with the new data that is from the server response
               replace: true,
             });
+            const wordlist = words.map((obj) => obj.message);
+            setDisplayWordList(wordlist.slice(-step));
             form.reset();
             setTimeout(() => {
-              form.querySelector("input")?.focus();
+              form.querySelector('input')?.focus();
             }, 0);
           }
         }}
