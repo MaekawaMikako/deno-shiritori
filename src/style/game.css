@@ -1,11 +1,11 @@
-.todos-app {
+.game {
   width: 90%;
   max-width: 600px;
   margin: 0 auto;
   padding-top: 60px;
 }
 
-.todos-app h1 {
+.game h1 {
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -18,19 +18,19 @@
   color: #333;
 }
 
-.todos-app h1 em {
+.game h1 em {
   font-size: 24px;
   font-weight: 100;
   color: #ccc;
 }
 
-.todos-app ul {
+.game ul {
   width: 100%;
   list-style: none;
   margin-bottom: 6px;
 }
 
-.todos-app ul li {
+.game ul li {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -39,11 +39,11 @@
   border-radius: 6px;
 }
 
-.todos-app ul li:hover {
+.game ul li:hover {
   background-color: #f9f9f9;
 }
 
-.todos-app ul li input {
+.game ul li input {
   position: relative;
   appearance: none;
   display: inline-flex;
@@ -56,12 +56,12 @@
   cursor: pointer;
 }
 
-.todos-app ul li input:hover,
-.todos-app ul li input:checked {
+.game ul li input:hover,
+.game ul li input:checked {
   border: 1px solid #b8dad4;
 }
 
-.todos-app ul li input:checked::after {
+.game ul li input:checked::after {
   display: inline-block;
   width: 6px;
   height: 6px;
@@ -70,7 +70,7 @@
   content: " ";
 }
 
-.todos-app ul li label {
+.game ul li label {
   line-height: 20px;
   flex-grow: 1;
   font-size: 20px;
@@ -79,12 +79,12 @@
   transition: color 0.15s ease;
 }
 
-.todos-app ul li label.completed {
+.game ul li label.completed {
   color: #aaa;
   text-decoration: line-through;
 }
 
-.todos-app ul li button {
+.game ul li button {
   position: relative;
   width: 20px;
   height: 20px;
@@ -94,16 +94,16 @@
   cursor: pointer;
 }
 
-.todos-app ul li:hover button {
+.game ul li:hover button {
   color: #ccc;
 }
 
-.todos-app ul li button:hover {
+.game ul li button:hover {
   color: #c26c5d;
 }
 
-.todos-app ul li button:before,
-.todos-app ul li button:after {
+.game ul li button:before,
+.game ul li button:after {
   content: " ";
   position: absolute;
   left: 10px;
@@ -114,21 +114,21 @@
   background: currentColor;
 }
 
-.todos-app ul li button:before {
+.game ul li button:before {
   transform: rotate(45deg);
 }
 
-.todos-app ul li button:after {
+.game ul li button:after {
   transform: rotate(-45deg);
 }
 
-.todos-app form {
+.game form {
   box-sizing: border-box;
   width: 100%;
   padding: 10px;
 }
 
-.todos-app form input {
+.game form input {
   display: block;
   width: 100%;
   padding: 6px 12px;
@@ -139,12 +139,12 @@
   color: #333;
 }
 
-.todos-app form input:focus{
+.game form input:focus {
   background-color: #f9f9f9;
   outline: none;
 }
 
-.todos-app form input::placeholder{
+.game form input::placeholder {
   font-style: italic;
   font-weight: 300;
   color: #aaa;

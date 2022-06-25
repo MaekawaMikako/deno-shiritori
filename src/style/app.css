@@ -1,13 +1,13 @@
-@import url('./reset.css');
-@import url('./index.css');
-@import url('./todos.css');
+@import url("./reset.css");
+@import url("./index.css");
+@import url("./game.css");
 
-header a  {
+header a {
   display: inline-flex;
 }
 
 header a:hover {
-  color: #000!important;
+  color: #000 !important;
 }
 
 .screen {
