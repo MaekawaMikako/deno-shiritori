@@ -1,6 +1,7 @@
 @import url("./reset.css");
 @import url("./index.css");
 @import url("./game.css");
+@import url(./color.css);
 
 header a {
   display: inline-flex;
