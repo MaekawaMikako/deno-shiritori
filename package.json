@@ -1,6 +1,9 @@
 {
   "lint-staged": {
-    "*.{ts,tsx}": [],
+    "*.{ts,tsx}": [
+      "eslint --cache --fix",
+      "prettier --write"
+    ],
     "*.css": [
       "stylelint --fix"
     ]
