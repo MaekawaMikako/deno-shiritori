@@ -8,7 +8,7 @@ export type Word = {
 };
 
 export type Store = {
-  words: Word[];
+        words: Word[];
 };
 
 const store: Store = {
