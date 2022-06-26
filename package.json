@@ -1,8 +1,6 @@
 {
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "git add"
-    ],
+    "*.{ts,tsx}": [],
     "*.css": [
       "stylelint --fix"
     ]
