@@ -83,6 +83,23 @@ export default function Words() {
           const form = e.currentTarget;
           const fd = new FormData(form);
           const message = fd.get('message')?.toString().trim();
+          const firstChar = (message??"").charAt(0);
+          const lastChar = (words.slice(-1)[0].message).charAt(words.slice(-1)[0].message.length - 1)
+          if(/[ん]$/.test(message??"")){
+            return alert("げーむおーばー");
+          }
+          if(/[ぁぃぅぇぉっゃゅょゎ]/.test(message??"")){
+            return alert("ぜんぶおおもじでかいてね");
+          }
+          if(/[^ぁ-ん]/.test(message??"")){
+            return alert("ひらがなをつかってね\nきごうもだめだよ");
+          }
+          if (firstChar !==lastChar){
+            return alert("まえのことばにつながってないよ");
+          }
+          if((message??"").length < 2){
+            alert("それはずるいからやめてほしいなぁ…");
+          }
           if (message) {
             await mutation.put({ message }, {
               // optimistic update data without waiting for the server response
