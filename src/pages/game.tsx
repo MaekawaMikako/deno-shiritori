@@ -61,25 +61,18 @@ export default function Words() {
         <meta name="description" content="A shiritori game powered by Aleph.js" />
       </Head>
       <h1>
-        <span>しりとりはじまりはじまり</span>
+        しりとりはじまりはじまり
       </h1>
       {words.length > step && (
-      <table>
-        <tbody>
-          {displayWordList.map((word, i) => (
-            <tr>
-              <td>
-                {words.length - step + i}
-              </td>
-              <td>
-                {word}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+        displayWordList.map((word, i) => (
+          <p className="recent-words">
+            {words.length - step + i}
+            {' '}
+            {word}
+          </p>
+        ))
       )}
-      <p>
+      <p className="most-recent-word">
         {words.length}
         {' '}
         {words.slice(-1)[0].message}
