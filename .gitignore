@@ -1,4 +1,6 @@
 .DS_Store
 .vscode
+.eslintcache
 Thumbs.db
 dist/
+node_modules

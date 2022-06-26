@@ -25,11 +25,11 @@ export default function Header() {
           <Link
             style={{
               fontSize: 16,
-              color: "#333",
+              color: "color-dark-gray",
             }}
             to="/"
           >
-
+            でぃーのしりとり
           </Link>
         </h1>
         <nav
