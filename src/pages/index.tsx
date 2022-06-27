@@ -1,5 +1,6 @@
 import { Head, Link } from "aleph/react";
 import { useEffect } from "react";
+import { Button } from "../components/button/index.tsx";
 
 export default function Index() {
   useEffect(() => {
@@ -22,11 +23,11 @@ export default function Index() {
         <br /> ここではひらがなしかつかえません
         <br /> いっしょにしりとりであそびましょう
       </p>
-      <nav>
+      <Button>
         <Link role="button" to="/game">
           げーむすたーと
         </Link>
-      </nav>
+      </Button>
     </div>
   );
 }
