@@ -3,6 +3,10 @@
 @import url("./game.css");
 @import url(./color.css);
 
+a {
+  text-decoration: none;
+}
+
 header a {
   display: inline-flex;
 }
