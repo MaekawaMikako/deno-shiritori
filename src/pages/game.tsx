@@ -44,7 +44,7 @@ export const data: Data<Store, Store> = {
   delete: () => store,
 };
 
-export default function Words() {
+export const Game = () => {
   const step = 5;
   const {
     data: { words },
@@ -149,4 +149,6 @@ export default function Words() {
       </Button>
     </div>
   );
-}
+};
+
+export default Game;

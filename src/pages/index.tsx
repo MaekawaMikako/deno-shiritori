@@ -2,7 +2,7 @@ import { Head, Link } from "aleph/react";
 import { useEffect } from "react";
 import { Button } from "../components/button/index.tsx";
 
-export default function Index() {
+export const Index = () => {
   useEffect(() => {
     const fn = async () => {
       const response = await fetch("/api/user");
@@ -30,4 +30,6 @@ export default function Index() {
       </Button>
     </div>
   );
-}
+};
+
+export default Index;
