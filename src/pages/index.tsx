@@ -1,6 +1,7 @@
 import { Head, Link } from "aleph/react";
 import { useEffect } from "react";
 import { Button } from "../components/button/index.tsx";
+import "../styles/index.css";
 
 export const Index = () => {
   useEffect(() => {

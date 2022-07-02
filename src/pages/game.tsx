@@ -2,6 +2,7 @@ import { Head, useData, Link } from "aleph/react";
 import { useEffect, useState } from "react";
 import { Button } from "../components/button/index.tsx";
 import { Modal } from "../components/modal/index.tsx";
+import "../styles/game.css";
 
 export type Word = {
   id: number;
