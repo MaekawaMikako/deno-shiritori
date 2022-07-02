@@ -16,7 +16,7 @@ export const Index = () => {
     <div className="screen index">
       <Head>
         <title>deno-shiritori</title>
-        <meta name="description" content="The Fullstack Framework in Deno." />
+        <meta name="description" content="Tしりとりする" />
       </Head>
       <div className="top-contents-container">
         <div className="top-message">
