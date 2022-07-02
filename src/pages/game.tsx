@@ -211,7 +211,7 @@ export const Game = () => {
                 </Link>
               </Button>
               <Button>
-                <Link role="button" to="/index">
+                <Link role="button" to="/">
                   げーむとっぷへ
                 </Link>
               </Button>
