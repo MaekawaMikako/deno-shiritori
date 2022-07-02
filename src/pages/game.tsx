@@ -74,7 +74,6 @@ export const Game = () => {
         <title>Game</title>
         <meta name="description" content="しりとりする" />
       </Head>
-      <h1>しりとりはじまりはじまり</h1>
       {words.length > step &&
         displayWordList.map((word, i) => (
           <p className="recent-words">
