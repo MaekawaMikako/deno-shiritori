@@ -69,7 +69,7 @@ export const Game = () => {
   };
 
   return (
-    <div className="game">
+    <div className="screen game">
       <Head>
         <title>Game</title>
         <meta
