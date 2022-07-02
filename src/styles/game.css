@@ -52,7 +52,7 @@
   align-items: center;
 }
 
-.game buttons {
+.game .buttons {
   display: flex;
   flex-direction: row;
   align-items: center;
