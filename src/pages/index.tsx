@@ -18,17 +18,21 @@ export const Index = () => {
         <title>deno-shiritori</title>
         <meta name="description" content="The Fullstack Framework in Deno." />
       </Head>
-      <h1>ことばであそぼう</h1>
-      <p>
-        でぃーのしりとりへようこそ
-        <br /> ここではひらがなしかつかえません
-        <br /> いっしょにしりとりであそびましょう
-      </p>
-      <Button>
-        <Link role="button" to="/game">
-          げーむすたーと
-        </Link>
-      </Button>
+      <div className="top-contents-container">
+        <div className="top-message">
+          <h1>ことばであそぼう</h1>
+          <p>
+            でぃーのしりとりへようこそ
+            <br /> ここではひらがなしかつかえません
+            <br /> いっしょにしりとりであそびましょう
+          </p>
+        </div>
+        <Button>
+          <Link role="button" to="/game">
+            げーむすたーと
+          </Link>
+        </Button>
+      </div>
     </div>
   );
 };
