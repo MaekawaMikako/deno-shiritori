@@ -142,17 +142,16 @@ export const Game = () => {
           disabled={!!isMutating}
         />
       </form>
-      <Button>
-        <Link role="button" to="/game">
-          はじめから
-        </Link>
-      </Button>
-      <Button>
-        <a>いちじていし</a>
-      </Button>
-      <Button onClick={() => setShowRule(true)}>
-        <a>るーる</a>
-      </Button>
+      <div className="buttons">
+        <Button>
+          <Link role="button" to="/game">
+            はじめから
+          </Link>
+        </Button>
+        <Button onClick={() => setShowRule(true)}>
+          <a>るーる</a>
+        </Button>
+      </div>
       <Modal
         title="るーる"
         content={

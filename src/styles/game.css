@@ -5,7 +5,7 @@
   padding-top: 60px;
 }
 
-h1 {
+.game h1 {
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -18,13 +18,13 @@ h1 {
   color: #333;
 }
 
-form {
+.game form {
   box-sizing: border-box;
   width: 100%;
   padding: 10px;
 }
 
-form input {
+.game form input {
   display: block;
   width: 100%;
   padding: 6px 12px;
@@ -35,12 +35,12 @@ form input {
   color: #333;
 }
 
-form input:focus {
+.game form input:focus {
   background-color: #f9f9f9;
   outline: none;
 }
 
-form input::placeholder {
+.game form input::placeholder {
   font-style: italic;
   font-weight: 300;
   color: #aaa;
@@ -50,4 +50,11 @@ form input::placeholder {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.game buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 }
