@@ -54,6 +54,7 @@ export const Game = () => {
   } = useData<Store>();
   const [displayWordList, setDisplayWordList] = useState<string[]>([]);
   const [showRule, setShowRule] = useState(true);
+  const [showGameOver, setShowGameOver] = useState(false);
 
   useEffect(() => {
     if (words) {
@@ -61,6 +62,10 @@ export const Game = () => {
       setDisplayWordList(wordlist.slice(-step));
     }
   }, []);
+
+  const gameOver = () => {
+    setShowGameOver(true);
+  };
 
   return (
     <div className="game">
@@ -92,7 +97,7 @@ export const Game = () => {
             .slice(-1)[0]
             .message.charAt(words.slice(-1)[0].message.length - 1);
           if (/[ん]$/.test(message ?? "")) {
-            return alert("げーむおーばー");
+            return gameOver();
           }
           if (/[ぁぃぅぇぉっゃゅょゎ]/.test(message ?? "")) {
             return alert("ぜんぶおおもじでかいてね");
@@ -179,6 +184,33 @@ export const Game = () => {
         }
         show={showRule}
         setShow={setShowRule}
+      />
+      <Modal
+        title="げーむおーばー"
+        content={
+          <div>
+            <p>
+              どんまい!
+              <br />
+              <br />
+              またあそんでね．
+            </p>
+            <div className="game-over-buttons">
+              <Button>
+                <Link role="button" to="/game">
+                  はじめから
+                </Link>
+              </Button>
+              <Button>
+                <Link role="button" to="/index">
+                  げーむとっぷへ
+                </Link>
+              </Button>
+            </div>
+          </div>
+        }
+        show={showGameOver}
+        setShow={setShowGameOver}
       />
     </div>
   );
