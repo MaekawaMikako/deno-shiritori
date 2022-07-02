@@ -1,6 +1,7 @@
 import { Head, useData, Link } from "aleph/react";
 import { useEffect, useState } from "react";
 import { Button } from "../components/button/index.tsx";
+import { Modal } from "../components/modal/index.tsx";
 
 export type Word = {
   id: number;
@@ -52,6 +53,8 @@ export const Game = () => {
     mutation,
   } = useData<Store>();
   const [displayWordList, setDisplayWordList] = useState<string[]>([]);
+  const [showRule, setShowRule] = useState(true);
+
   useEffect(() => {
     if (words) {
       const wordlist = words.map((obj) => obj.message);
@@ -133,20 +136,50 @@ export const Game = () => {
           disabled={!!isMutating}
         />
       </form>
-
       <Button>
         <Link role="button" to="/game">
           はじめから
         </Link>
       </Button>
-
       <Button>
         <a>いちじていし</a>
       </Button>
-
-      <Button>
+      <Button onClick={() => setShowRule(true)}>
         <a>るーる</a>
       </Button>
+      <Modal
+        title="るーる"
+        content={
+          <div>
+            <p>
+              ひらがなしかつかってはいけません．
+              <br />
+              <br />
+              きごうやこもじもつかってはいけません．
+              <br />
+              “でぃーの”→”でいの”
+              <br />
+              のようにかきかえましょう．
+              <br />
+              <br />
+              なんとなく1もじのことばは
+              <br />
+              ずるいきがするのでさけてください．
+              <br />
+              <br />
+              つぎのことばをこたえるまでの
+              <br />
+              せいげんじかんは15びょうです．
+              <br />
+              おもいつかなかったらげーむおーばー!
+              <br />
+              がんばってね．
+            </p>
+          </div>
+        }
+        show={showRule}
+        setShow={setShowRule}
+      />
     </div>
   );
 };
