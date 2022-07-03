@@ -13,8 +13,14 @@ export type Store = {
   words: Word[];
 };
 
+const getRandomInt = (max: number) => {
+  return Math.floor(Math.random() * max);
+};
+
+const randomWords = ["しりとり", "でいの", "じぐ", "めがね", "さばえ"];
+
 const INITIAL_STORE: Store = {
-  words: [{ id: 0, message: "しりとり" }],
+  words: [{ id: 0, message: randomWords[getRandomInt(randomWords.length)] }],
 };
 
 const store: Store = {
@@ -51,9 +57,11 @@ export const data: Data<Store, Store> = {
     return store;
   },
   delete: () => {
-    store.words = [...INITIAL_STORE.words];
-    window.localStorage?.setItem("words", JSON.stringify(INITIAL_STORE.words));
-    return INITIAL_STORE;
+    store.words = [
+      { id: 0, message: randomWords[getRandomInt(randomWords.length)] },
+    ];
+    window.localStorage?.setItem("words", JSON.stringify(store.words));
+    return store;
   },
 };
 
