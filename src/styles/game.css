@@ -18,15 +18,19 @@
 }
 
 .game .recent-word {
-  font-size: 20px;
+  font-size: 16px;
   padding-top: 16px;
   color: var(--color-dark-gray);
 }
 
 .game .most-recent-word {
-  font-size: 40px;
+  font-size: 32px;
   padding: 32px 0;
   color: var(--color-brack);
+}
+
+.game .most-recent-word span{
+  font-family: 'AiShiroYukiguni_Free-Regular';
 }
 
 .game form {
@@ -50,13 +54,13 @@
 }
 
 .game form input:focus {
-  background-color: var(--color-white);
   outline: none;
   border: 1px solid var(--color-gray);
 }
 
 .game form input::placeholder {
   font-weight: 300;
+  color:  var(--color-light-gray);;
 }
 
 .game .game-over-buttons {

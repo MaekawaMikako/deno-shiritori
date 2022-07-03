@@ -29,6 +29,7 @@
 
 .title {
   font-size: 40px;
+  font-family: 'AiShiroYukiguni_Free-Regular';
 }
 
 .close {
@@ -40,7 +41,7 @@
 }
 
 .content {
-  padding-top: 32px;
+  padding-top: 64px;
   font-size: 18px;
   line-height: 1.6;
   color: var(--color-dark-gray);

@@ -86,7 +86,7 @@ export const Game = () => {
                 ))}
             </div>
             <p className="most-recent-word">
-              {words.length} {words.slice(-1)[0].message}
+              {words.length} <span>{words.slice(-1)[0].message}</span>
             </p>
           </div>
         </div>
