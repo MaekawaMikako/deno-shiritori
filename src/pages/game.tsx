@@ -7,43 +7,54 @@ import "../styles/game.css";
 export type Word = {
   id: number;
   message: string;
-  completed: boolean;
 };
 
 export type Store = {
   words: Word[];
 };
 
+const INITIAL_STORE: Store = {
+  words: [{ id: 0, message: "しりとり" }],
+};
+
 const store: Store = {
-  words: JSON.parse(window.localStorage?.getItem("words") || "[]"),
+  words: JSON.parse(
+    window.localStorage?.getItem("words") || JSON.stringify(INITIAL_STORE.words)
+  ),
 };
 
 export const data: Data<Store, Store> = {
   cacheTtl: 0, // no cache
-  get: () => store,
+  get: () => {
+    if (store.words.length == 0) {
+      return INITIAL_STORE;
+    }
+    return store;
+  },
   put: async (req) => {
     const { message } = await req.json();
     if (typeof message === "string") {
-      store.words.push({ id: Date.now(), message, completed: false });
+      store.words.push({ id: Date.now(), message });
       window.localStorage?.setItem("words", JSON.stringify(store.words));
     }
     return store;
   },
   patch: async (req) => {
-    const { id, message, completed } = await req.json();
+    const { id, message } = await req.json();
     const word = store.words.find((word) => word.id === id);
     if (word) {
       if (typeof message === "string") {
         word.message = message;
       }
-      if (typeof completed === "boolean") {
-        word.completed = completed;
-      }
       window.localStorage?.setItem("words", JSON.stringify(store.words));
     }
     return store;
   },
-  delete: () => store,
+  delete: () => {
+    store.words = [...INITIAL_STORE.words];
+    window.localStorage?.setItem("words", JSON.stringify(INITIAL_STORE.words));
+    return INITIAL_STORE;
+  },
 };
 
 export const Game = () => {
@@ -58,7 +69,7 @@ export const Game = () => {
   const [showGameOver, setShowGameOver] = useState(false);
 
   useEffect(() => {
-    if (words) {
+    if (words.length > 0) {
       const wordlist = words.map((obj) => obj.message);
       setDisplayWordList(wordlist.slice(-step));
     }
@@ -66,6 +77,11 @@ export const Game = () => {
 
   const gameOver = () => {
     setShowGameOver(true);
+  };
+
+  const reset = () => {
+    mutation.delete(undefined, "replace");
+    setDisplayWordList(INITIAL_STORE.words.map((word) => word.message));
   };
 
   return (
@@ -76,19 +92,22 @@ export const Game = () => {
       </Head>
       <div className="game-contents-container">
         <div className="words-contents-container">
-          <div className="recent-words-container">
-            <div className="recent-words">
-              {words.length > step &&
-                displayWordList.map((word, i) => (
-                  <p className="recent-word">
-                    {words.length - step + i} {word}
-                  </p>
-                ))}
+          {words.length > 0 && (
+            <div className="recent-words-container">
+              {words.length > 1 && (
+                <div className="recent-words">
+                  {displayWordList.map((word, i) => (
+                    <p className="recent-word">
+                      {words.length - displayWordList.length + i} {word}
+                    </p>
+                  ))}
+                </div>
+              )}
+              <p className="most-recent-word">
+                {words.length} <span>{words.slice(-1)[0].message}</span>
+              </p>
             </div>
-            <p className="most-recent-word">
-              {words.length} <span>{words.slice(-1)[0].message}</span>
-            </p>
-          </div>
+          )}
         </div>
         <div className="operation-conatainer">
           <form
@@ -122,10 +141,7 @@ export const Game = () => {
                   {
                     // optimistic update data without waiting for the server response
                     optimisticUpdate: (data) => ({
-                      words: [
-                        ...data.words,
-                        { id: 0, message, completed: false },
-                      ],
+                      words: [...data.words, { id: Date.now(), message }],
                     }),
                     // replace the data with the new data that is from the server response
                     replace: true,
@@ -150,7 +166,7 @@ export const Game = () => {
             />
           </form>
           <div className="buttons">
-            <Button>
+            <Button onClick={reset}>
               <Link role="button" to="/game">
                 はじめから
               </Link>
@@ -206,7 +222,7 @@ export const Game = () => {
             </p>
             <div className="game-over-buttons">
               <Button>
-                <Link role="button" to="/game">
+                <Link onClick={reset} role="button" to="/game">
                   はじめから
                 </Link>
               </Button>
