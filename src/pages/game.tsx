@@ -128,6 +128,9 @@ export const Game = () => {
               const lastChar = words
                 .slice(-1)[0]
                 .message.charAt(words.slice(-1)[0].message.length - 1);
+              if (words.map((word) => word.message).includes(message ?? "")) {
+                return gameOver();
+              }
               if (/[ん]$/.test(message ?? "")) {
                 return gameOver();
               }
