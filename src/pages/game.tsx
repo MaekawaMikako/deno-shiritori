@@ -1,4 +1,8 @@
-import { Head, useData, Link } from "aleph/react";
+import {
+  Head,
+  useData,
+  Link,
+} from "https://deno.land/x/aleph@1.0.0-alpha.71/framework/react/mod.ts";
 import { useEffect, useState } from "react";
 import { Button } from "../components/button/index.tsx";
 import { Modal } from "../components/modal/index.tsx";
@@ -13,8 +17,28 @@ export type Store = {
   words: Word[];
 };
 
+const getRandomInt = (max: number) => {
+  return Math.floor(Math.random() * max);
+};
+
+const initialWords: Store = {
+  words: [
+    { id: 0, message: "しりとり" },
+    { id: 1, message: "ぎつと" },
+    { id: 2, message: "でいの" },
+    { id: 3, message: "じぐ" },
+    { id: 4, message: "さばえ" },
+  ],
+};
+
 const INITIAL_STORE: Store = {
-  words: [{ id: 0, message: "しりとり" }],
+  words: [
+    { id: 0, message: "しりとり" },
+    { id: 1, message: "ぎつと" },
+    { id: 2, message: "でいの" },
+    { id: 3, message: "じぐ" },
+    { id: 4, message: "さばえ" },
+  ],
 };
 
 const store: Store = {

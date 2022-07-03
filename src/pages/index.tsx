@@ -1,4 +1,7 @@
-import { Head, Link } from "aleph/react";
+import {
+  Head,
+  Link,
+} from "https://deno.land/x/aleph@1.0.0-alpha.71/framework/react/mod.ts";
 import { useEffect } from "react";
 import { Button } from "../components/button/index.tsx";
 import "../styles/index.css";
