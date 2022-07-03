@@ -1,6 +1,6 @@
-import { App } from "aleph/react";
-import { serve } from "aleph/server";
-import { renderToReadableStream } from "react-dom/server";
+import { App } from "https://deno.land/x/aleph@1.0.0-alpha.71/framework/react/mod.ts";
+import { serve } from "https://deno.land/x/aleph@1.0.0-alpha.71/server/mod.ts";
+import { renderToReadableStream } from "https://esm.sh/react-dom@18.1.0/server";
 
 serve({
   routes: "./src/pages/**/*.{tsx,ts}",
