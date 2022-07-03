@@ -1,4 +1,4 @@
-import { Link } from "https://deno.land/x/aleph@1.0.0-alpha.71/framework/react/mod.ts";
+import { Link } from "aleph/react";
 
 export const E404 = () => {
   return (
