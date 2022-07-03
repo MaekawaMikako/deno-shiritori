@@ -10,7 +10,14 @@
 
 body {
   font-size: 16px;
-  font-family: Inter, system-ui, -apple-system,
+  font-family: Arial,'UmiYamaLogoGothicFreeVer-R', Inter, system-ui, -apple-system,
     /* Firefox supports this but not yet `system-ui` */ "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    Helvetica, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+@font-face {
+  font-family: 'AiShiroYukiguni_Free-Regular';
+  src: url('../../public/fonts/AiShiroYukiguni_Free-Regular.otf') format('otf');
+  font-family: 'UmiYamaLogoGothicFreeVer-R';
+  src: url('../../public/fonts/UmiYamaLogoGothicFreeVer-R.otf') format('otf');
 }
