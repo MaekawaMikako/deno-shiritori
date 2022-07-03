@@ -1,6 +1,5 @@
 {
   "imports": {
-    "~/": "./",
     "@unocss/": "https://deno.land/x/aleph@1.0.0-alpha.71/lib/@unocss/",
     "aleph/": "https://deno.land/x/aleph@1.0.0-alpha.71/",
     "aleph/server": "https://deno.land/x/aleph@1.0.0-alpha.71/server/mod.ts",
