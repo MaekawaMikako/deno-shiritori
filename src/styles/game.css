@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+.game .recent-words{
   margin-top: -16px;
 }
 
