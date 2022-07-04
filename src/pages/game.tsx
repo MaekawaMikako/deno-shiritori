@@ -111,7 +111,7 @@ export const Game = () => {
 
   useEffect(() => {
     if (words.length > 0) {
-      const wordlist = words.map((obj) => obj.message);
+      const wordlist = words.map((word) => word.message);
       setDisplayWordList(wordlist.slice(-step));
     }
   }, []);
@@ -201,7 +201,7 @@ export const Game = () => {
                       replace: true,
                     }
                   );
-                  const wordlist = words.map((obj) => obj.message);
+                  const wordlist = words.map((word) => word.message);
                   setDisplayWordList(wordlist.slice(-step));
                   form.reset();
                   setTimeout(() => {
