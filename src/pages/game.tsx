@@ -164,7 +164,11 @@ export const Game = () => {
     <div className="screen game">
       <Head>
         <title>Game</title>
-        <meta name="description" content="しりとりする" />
+        <meta
+          name="description"
+          content="ことばであそぼう!!
+          いますぐしりとり!!"
+        />
       </Head>
       <div className="game-contents-container">
         <div className="words-contents-container">

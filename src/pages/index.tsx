@@ -16,7 +16,11 @@ export const Index = () => {
     <div className="screen index">
       <Head>
         <title>deno-shiritori</title>
-        <meta name="description" content="Tしりとりする" />
+        <meta
+          name="description"
+          content="でぃーのしりとりへようこそ．
+          ここではひらがなしかつかえません．いっしょにしりとりであそびましょう．"
+        />
       </Head>
       <div className="top-contents-container">
         <div className="top-message">
