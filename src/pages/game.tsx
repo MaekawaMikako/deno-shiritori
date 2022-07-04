@@ -1,5 +1,5 @@
 import { Head, useData, Link } from "aleph/react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "../components/button/index.tsx";
 import { Modal } from "../components/modal/index.tsx";
 import "../styles/game.css";
@@ -98,7 +98,8 @@ export const data: Data<Store, Store> = {
 
 export const Game = () => {
   const step = 3;
-  const limitTime = 10;
+  const limitCount = 5;
+  const intervalRef: { current: number | null | undefined } = useRef(null);
   const {
     data: { words },
     isMutating,
@@ -108,22 +109,51 @@ export const Game = () => {
   const [showRule, setShowRule] = useState(true);
   const [showGameOver, setShowGameOver] = useState(false);
   const [gameEnd, setGameEnd] = useState(false);
-
+  const [count, setCount] = useState(limitCount);
   useEffect(() => {
     if (words.length > 0) {
       setDisplayWordList(words.map((word) => word.message).slice(-step));
     }
   }, []);
+  useEffect(() => {
+    if (count === 0) {
+      gameOver();
+    }
+  }, [count]);
+
+  const startCount = useCallback(() => {
+    if (intervalRef.current !== null) {
+      return;
+    }
+    intervalRef.current = setInterval(() => {
+      setCount((c) => c - 1);
+    }, 1000);
+  }, []);
+
+  const stopCount = useCallback(() => {
+    if (intervalRef.current === null) {
+      return;
+    }
+    clearInterval(intervalRef.current);
+    intervalRef.current = null;
+  }, []);
+
+  const resetCount = () => {
+    setCount(limitCount);
+    startCount();
+  };
 
   const gameOver = () => {
     setShowGameOver(true);
     setGameEnd(true);
+    stopCount();
   };
 
-  const reset = () => {
+  const restart = () => {
     mutation.delete(undefined, "replace");
     setDisplayWordList(INITIAL_STORE.words.map((word) => word.message));
     setGameEnd(false);
+    stopCount();
   };
 
   return (
@@ -149,7 +179,7 @@ export const Game = () => {
                     <p className="time">
                       あと
                       <br />
-                      <span>10</span>
+                      <span>{count}</span>
                       びょう
                     </p>
                   </div>
@@ -201,6 +231,7 @@ export const Game = () => {
                   setDisplayWordList(
                     words.map((word) => word.message).slice(-step)
                   );
+                  resetCount();
                   form.reset();
                   setTimeout(() => {
                     form.querySelector("input")?.focus();
@@ -219,7 +250,7 @@ export const Game = () => {
             </form>
           )}
           <div className="buttons">
-            <Button onClick={reset}>
+            <Button onClick={restart}>
               <Link role="button" to="/game">
                 はじめから
               </Link>
@@ -258,7 +289,7 @@ export const Game = () => {
               <br />
               つぎのことばをこたえるまでの
               <br />
-              せいげんじかんは{limitTime}びょうです．
+              せいげんじかんは{limitCount}びょうです．
               <br />
               <br />
               おなじことばは1かいだけ．
@@ -285,12 +316,12 @@ export const Game = () => {
               <Button
                 onClick={() => {
                   setShowGameOver(false);
-                  reset();
+                  restart();
                 }}
               >
                 <a>はじめから</a>
               </Button>
-              <Button onClick={reset}>
+              <Button onClick={restart}>
                 <Link role="button" to="/">
                   げーむとっぷへ
                 </Link>
