@@ -134,12 +134,22 @@ export const Game = () => {
           {words.length > 0 && (
             <div className="recent-words-container">
               {words.length > 1 && (
-                <div className="recent-words">
-                  {displayWordList.map((word, i) => (
-                    <p className="recent-word">
-                      {words.length - displayWordList.length + i} {word}
+                <div className="container">
+                  <div className="recent-words">
+                    {displayWordList.map((word, i) => (
+                      <p className="recent-word">
+                        {words.length - displayWordList.length + i} {word}
+                      </p>
+                    ))}
+                  </div>
+                  <div className="timer">
+                    <p className="time">
+                      あと
+                      <br />
+                      <span>10</span>
+                      びょう
                     </p>
-                  ))}
+                  </div>
                 </div>
               )}
               <p className="most-recent-word">
