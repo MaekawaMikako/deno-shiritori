@@ -307,7 +307,7 @@ export const Game = () => {
         content={
           <div>
             <p>
-              {words.length}たんごもつづいたよ!
+              {words.length}かいもつづいたよ!
               <br />
               <br />
               またあそんでね．
