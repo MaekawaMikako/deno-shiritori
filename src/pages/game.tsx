@@ -98,6 +98,7 @@ export const data: Data<Store, Store> = {
 
 export const Game = () => {
   const step = 3;
+  const limitTime = 10;
   const {
     data: { words },
     isMutating,
@@ -259,7 +260,7 @@ export const Game = () => {
               <br />
               つぎのことばをこたえるまでの
               <br />
-              せいげんじかんは15びょうです．
+              せいげんじかんは{limitTime}びょうです．
               <br />
               <br />
               おなじことばは1かいだけ．
