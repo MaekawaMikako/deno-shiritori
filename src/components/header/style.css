@@ -23,6 +23,7 @@ header a {
   color: var(--color-dark-gray);
   text-decoration: none;
   cursor: pointer;
+  display: inline-flex;
 }
 
 header a:hover {
