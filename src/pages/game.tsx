@@ -207,7 +207,7 @@ export const Game = () => {
                 if (/[ん]$/.test(message ?? "")) {
                   return gameOver();
                 }
-                if (/[^ぁ-ん]ー/.test(message ?? "")) {
+                if (/[^ぁ-んー]/.test(message ?? "")) {
                   return alert("ひらがなをつかってね\n");
                 }
                 if (firstChar !== lastChar) {
