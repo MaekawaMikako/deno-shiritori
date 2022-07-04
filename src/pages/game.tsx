@@ -264,7 +264,7 @@ export const Game = () => {
               またあそんでね．
             </p>
             <div className="game-over-buttons">
-              <Button>
+              <Button onClick={reset}>
                 <Link role="button" to="/">
                   げーむとっぷへ
                 </Link>
