@@ -282,6 +282,14 @@ export const Game = () => {
               またあそんでね．
             </p>
             <div className="game-over-buttons">
+              <Button
+                onClick={() => {
+                  setShowGameOver(false);
+                  reset();
+                }}
+              >
+                <a>はじめから</a>
+              </Button>
               <Button onClick={reset}>
                 <Link role="button" to="/">
                   げーむとっぷへ
