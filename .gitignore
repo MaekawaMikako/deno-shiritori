@@ -2,5 +2,4 @@
 .vscode
 .eslintcache
 Thumbs.db
-dist/
 node_modules
