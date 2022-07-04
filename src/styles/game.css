@@ -75,14 +75,14 @@
 
 .game form input {
   display: block;
-  width: 100%;
+  width: 614px;
   padding: 12px;
   font-size: 16px;
   font-weight: 300;
   color: var(--color-gray);
   outline: none;
   border: 1px solid var(--color-light-gray);
-  border-radius: 20px;
+  border-radius: 100;
 }
 
 .game form input:focus {
