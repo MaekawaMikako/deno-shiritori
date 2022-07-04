@@ -110,6 +110,7 @@ export const Game = () => {
   const [showGameOver, setShowGameOver] = useState(false);
   const [gameEnd, setGameEnd] = useState(false);
   const [count, setCount] = useState(limitCount);
+  const [mostLongConnect, setMostLongConnect] = useState(0);
   useEffect(() => {
     if (words.length > 0) {
       setDisplayWordList(words.map((word) => word.message).slice(-step));
@@ -154,6 +155,9 @@ export const Game = () => {
     setDisplayWordList(INITIAL_STORE.words.map((word) => word.message));
     setGameEnd(false);
     stopCount();
+    if (mostLongConnect < words.length) {
+      setMostLongConnect(words.length);
+    }
   };
 
   return (
@@ -310,6 +314,16 @@ export const Game = () => {
               {words.length}かいもつづいたよ!
               <br />
               <br />
+              いままでのさいこうきろくは{mostLongConnect}かい!
+              <br />
+              <br />
+              {mostLongConnect <= words.length && (
+                <p>
+                  おめでとう!
+                  <br />
+                  <br />
+                </p>
+              )}
               またあそんでね．
             </p>
             <div className="game-over-buttons">
