@@ -199,10 +199,7 @@ export const Game = () => {
                     }
                   );
                   setDisplayWordList(
-                    words
-                      .map((word) => word.message)
-                      .slice(-step)
-                      .slice(-step)
+                    words.map((word) => word.message).slice(-step)
                   );
                   form.reset();
                   setTimeout(() => {
