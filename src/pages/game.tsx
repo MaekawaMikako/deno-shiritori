@@ -48,7 +48,7 @@ const getRandomInt = (max: number) => {
   return Math.floor(Math.random() * max);
 };
 
-const randomWords = ["しりとり", "でいの", "じぐ", "めがね", "さばえ"];
+const randomWords = ["しりとり", "でぃーの", "じぐ", "めがね", "さばえ"];
 
 const INITIAL_STORE: Store = {
   words: [{ id: 0, message: randomWords[getRandomInt(randomWords.length)] }],
