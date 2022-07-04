@@ -148,9 +148,6 @@ export const Game = () => {
     setShowGameOver(true);
     setGameEnd(true);
     stopCount();
-    if (mostLongConnect < words.length) {
-      setMostLongConnect(words.length);
-    }
   };
 
   const restart = () => {
@@ -158,6 +155,9 @@ export const Game = () => {
     setDisplayWordList(INITIAL_STORE.words.map((word) => word.message));
     setGameEnd(false);
     stopCount();
+    if (mostLongConnect < words.length) {
+      setMostLongConnect(words.length);
+    }
   };
 
   return (
@@ -317,7 +317,7 @@ export const Game = () => {
               いままでのさいこうきろくは{mostLongConnect}かい!
               <br />
               <br />
-              {mostLongConnect === words.length && (
+              {mostLongConnect <= words.length && (
                 <p>
                   おめでとう!
                   <br />
