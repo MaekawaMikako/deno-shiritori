@@ -106,6 +106,7 @@ export const Game = () => {
   const [displayWordList, setDisplayWordList] = useState<string[]>([]);
   const [showRule, setShowRule] = useState(true);
   const [showGameOver, setShowGameOver] = useState(false);
+  const [gameEnd, setGameEnd] = useState(false);
 
   useEffect(() => {
     if (words.length > 0) {
@@ -116,11 +117,15 @@ export const Game = () => {
 
   const gameOver = () => {
     setShowGameOver(true);
+    setGameEnd(true);
+    console.log("gameOver() gameEnd: " + gameEnd);
   };
 
   const reset = () => {
     mutation.delete(undefined, "replace");
     setDisplayWordList(INITIAL_STORE.words.map((word) => word.message));
+    setGameEnd(false);
+    console.log("reset() gameEnd: " + gameEnd);
   };
 
   return (
@@ -159,59 +164,61 @@ export const Game = () => {
           )}
         </div>
         <div className="operation-conatainer">
-          <form
-            onSubmit={async (e) => {
-              e.preventDefault();
-              const form = e.currentTarget;
-              const fd = new FormData(form);
-              const message = fd.get("message")?.toString().trim();
-              const firstChar = (message ?? "").charAt(0);
-              const lastChar = changeLastChar(words.slice(-1)[0].message);
-              if (words.map((word) => word.message).includes(message ?? "")) {
-                return gameOver();
-              }
-              if (/[ん]$/.test(message ?? "")) {
-                return gameOver();
-              }
-              if (/[^ぁ-ん]ー/.test(message ?? "")) {
-                return alert("ひらがなをつかってね\n");
-              }
-              if (firstChar !== lastChar) {
-                return alert("まえのことばにつながってないよ");
-              }
-              if ((message ?? "").length < 2) {
-                alert("それはずるいからやめてほしいなぁ…");
-              }
-              if (message) {
-                await mutation.put(
-                  { message },
-                  {
-                    // optimistic update data without waiting for the server response
-                    optimisticUpdate: (data) => ({
-                      words: [...data.words, { id: Date.now(), message }],
-                    }),
-                    // replace the data with the new data that is from the server response
-                    replace: true,
-                  }
-                );
-                const wordlist = words.map((obj) => obj.message);
-                setDisplayWordList(wordlist.slice(-step));
-                form.reset();
-                setTimeout(() => {
-                  form.querySelector("input")?.focus();
-                }, 0);
-              }
-            }}
-          >
-            <input
-              type="text"
-              name="message"
-              placeholder="つぎのことばをにゅうりょくしてね"
-              autoFocus
-              autoComplete="off"
-              disabled={!!isMutating}
-            />
-          </form>
+          {gameEnd === false && (
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault();
+                const form = e.currentTarget;
+                const fd = new FormData(form);
+                const message = fd.get("message")?.toString().trim();
+                const firstChar = (message ?? "").charAt(0);
+                const lastChar = changeLastChar(words.slice(-1)[0].message);
+                if (words.map((word) => word.message).includes(message ?? "")) {
+                  return gameOver();
+                }
+                if (/[ん]$/.test(message ?? "")) {
+                  return gameOver();
+                }
+                if (/[^ぁ-ん]ー/.test(message ?? "")) {
+                  return alert("ひらがなをつかってね\n");
+                }
+                if (firstChar !== lastChar) {
+                  return alert("まえのことばにつながってないよ");
+                }
+                if ((message ?? "").length < 2) {
+                  alert("それはずるいからやめてほしいなぁ…");
+                }
+                if (message) {
+                  await mutation.put(
+                    { message },
+                    {
+                      // optimistic update data without waiting for the server response
+                      optimisticUpdate: (data) => ({
+                        words: [...data.words, { id: Date.now(), message }],
+                      }),
+                      // replace the data with the new data that is from the server response
+                      replace: true,
+                    }
+                  );
+                  const wordlist = words.map((obj) => obj.message);
+                  setDisplayWordList(wordlist.slice(-step));
+                  form.reset();
+                  setTimeout(() => {
+                    form.querySelector("input")?.focus();
+                  }, 0);
+                }
+              }}
+            >
+              <input
+                type="text"
+                name="message"
+                placeholder="つぎのことばをにゅうりょくしてね"
+                autoFocus
+                autoComplete="off"
+                disabled={!!isMutating}
+              />
+            </form>
+          )}
           <div className="buttons">
             <Button onClick={reset}>
               <Link role="button" to="/game">
