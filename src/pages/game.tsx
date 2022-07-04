@@ -13,6 +13,37 @@ export type Store = {
   words: Word[];
 };
 
+const changeLastChar = (e: string) => {
+  let lastChar = "";
+  if (e.slice(-1) === "ー") {
+    lastChar = e.slice(-2).slice(0, 1);
+  } else {
+    lastChar = e.slice(-1);
+  }
+  if (lastChar === "ぁ") {
+    return "あ";
+  } else if (lastChar === "ぃ") {
+    return "い";
+  } else if (lastChar === "ぅ") {
+    return "う";
+  } else if (lastChar === "ぇ") {
+    return "え";
+  } else if (lastChar === "ぉ") {
+    return "お";
+  } else if (lastChar === "っ") {
+    return "つ";
+  } else if (lastChar === "ゃ") {
+    return "や";
+  } else if (lastChar === "ゅ") {
+    return "ゆ";
+  } else if (lastChar === "ょ") {
+    return "よ";
+  } else if (lastChar === "ゎ") {
+    return "わ";
+  }
+  return lastChar;
+};
+
 const getRandomInt = (max: number) => {
   return Math.floor(Math.random() * max);
 };
@@ -125,20 +156,15 @@ export const Game = () => {
               const fd = new FormData(form);
               const message = fd.get("message")?.toString().trim();
               const firstChar = (message ?? "").charAt(0);
-              const lastChar = words
-                .slice(-1)[0]
-                .message.charAt(words.slice(-1)[0].message.length - 1);
+              const lastChar = changeLastChar(words.slice(-1)[0].message);
               if (words.map((word) => word.message).includes(message ?? "")) {
                 return gameOver();
               }
               if (/[ん]$/.test(message ?? "")) {
                 return gameOver();
               }
-              if (/[ぁぃぅぇぉっゃゅょゎ]/.test(message ?? "")) {
-                return alert("ぜんぶおおもじでかいてね");
-              }
-              if (/[^ぁ-ん]/.test(message ?? "")) {
-                return alert("ひらがなをつかってね\nきごうもだめだよ");
+              if (/[^ぁ-ん]ー/.test(message ?? "")) {
+                return alert("ひらがなをつかってね\n");
               }
               if (firstChar !== lastChar) {
                 return alert("まえのことばにつながってないよ");
