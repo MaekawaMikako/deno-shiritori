@@ -226,17 +226,12 @@ export const Game = () => {
         content={
           <div>
             <p>
-              どんまい!
+              {words.length}たんごもつづいたよ!
               <br />
               <br />
               またあそんでね．
             </p>
             <div className="game-over-buttons">
-              <Button>
-                <Link onClick={reset} role="button" to="/game">
-                  はじめから
-                </Link>
-              </Button>
               <Button>
                 <Link role="button" to="/">
                   げーむとっぷへ
