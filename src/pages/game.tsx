@@ -111,22 +111,19 @@ export const Game = () => {
 
   useEffect(() => {
     if (words.length > 0) {
-      const wordlist = words.map((word) => word.message);
-      setDisplayWordList(wordlist.slice(-step));
+      setDisplayWordList(words.map((word) => word.message).slice(-step));
     }
   }, []);
 
   const gameOver = () => {
     setShowGameOver(true);
     setGameEnd(true);
-    console.log("gameOver() gameEnd: " + gameEnd);
   };
 
   const reset = () => {
     mutation.delete(undefined, "replace");
     setDisplayWordList(INITIAL_STORE.words.map((word) => word.message));
     setGameEnd(false);
-    console.log("reset() gameEnd: " + gameEnd);
   };
 
   return (
@@ -201,8 +198,12 @@ export const Game = () => {
                       replace: true,
                     }
                   );
-                  const wordlist = words.map((word) => word.message);
-                  setDisplayWordList(wordlist.slice(-step));
+                  setDisplayWordList(
+                    words
+                      .map((word) => word.message)
+                      .slice(-step)
+                      .slice(-step)
+                  );
                   form.reset();
                   setTimeout(() => {
                     form.querySelector("input")?.focus();
